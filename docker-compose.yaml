@@ -11,3 +11,9 @@ services:
         ports:
             - 8080:8080
         restart: unless-stopped
+    redis:
+        image: redis:7.0.0
+        command: redis-server --requirepass password
+        container_name: redis
+        ports:
+            - 6379:6379

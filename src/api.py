@@ -1,14 +1,21 @@
+import os
 import json
 from flask import Flask, request, Response
+from flask_caching import Cache
 from BigWebPriceFinder import BigWebPriceFinder
 from YuyuteiPriceFinder import YuyuteiPriceFinder
 
 
 app = Flask(__name__)
+app.config.from_object('Config.Config')
+
+cache = Cache(app)
+
 bigWebPriceFinder = BigWebPriceFinder()
 yuyuteiPriceFinder = YuyuteiPriceFinder()
 
 @app.route('/api/cards', methods=['GET'])
+@cache.cached(timeout=259200, query_string=True)
 def cards():
     args = request.args
     name = args.get("name")
