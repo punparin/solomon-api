@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+    dev:
+        container_name: solomon-api
+        image: punparin/solomon-api:local
+        env_file:
+            - .env
+        volumes:
+            - ./config.json:/app/config.json
+        ports:
+            - 8080:8080
+        restart: unless-stopped
