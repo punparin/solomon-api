@@ -46,18 +46,11 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Environment variables
-
-```env
-# .env
-DISCORD_TOKEN=<TOKEN>
-```
-
 ### Running on local
 
 ```sh
 # Run on machine
-python src/main.py
+gunicorn --bind 0.0.0.0:8080 --pythonpath src wsgi:app
 
 # Run on docker
 earthly +compose-up
