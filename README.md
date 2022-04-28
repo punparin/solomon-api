@@ -56,3 +56,9 @@ gunicorn --bind 0.0.0.0:8080 --pythonpath src wsgi:app
 earthly +compose-up
 earthly +compose-down
 ```
+
+### Release
+
+```sh
+earthly --build-arg TAG=<TAG> --push +release
+```
