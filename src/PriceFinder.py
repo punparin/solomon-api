@@ -30,10 +30,10 @@ class PriceFinder:
         return name
 
     def format_price(self, price):
-        return price.text.strip().replace("円", "")
+        return price.strip().replace("円", "")
 
     def format_rarity(self, rarity):
-        rarity = rarity.text.strip()
+        rarity = rarity.strip()
         if rarity in self.rarity_alias:
             return self.rarity_alias[rarity]
         

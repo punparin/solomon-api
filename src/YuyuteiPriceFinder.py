@@ -18,14 +18,14 @@ class YuyuteiPriceFinder(PriceFinder):
 
         for div in divs:
             raw_rarity = div.find("em", {"class": "gr_color"})
-            rarity = self.format_rarity(raw_rarity)
+            rarity = self.format_rarity(raw_rarity.text)
             cards = div.find_all("li", {"class": re.compile(r'^card_unit rarity_.*$')})
 
             for card in cards:
                 raw_card_id = card.find("p", {"class": "id"})
                 raw_price = card.find("p", {"class": "price"})
                 card_id = raw_card_id.text.strip()
-                price = self.format_price(raw_price)
+                price = self.format_price(raw_price.text)
                 
                 card = Card(card_id, jp_name, rarity, "Play", price)
                 card_info.add_card(card)
