@@ -3,7 +3,8 @@ from PriceFinder import *
 class BigWebPriceFinder(PriceFinder):
     def __init__(self):
         super().__init__()
-        self.bigweb_endpoint = "https://api.bigweb.co.jp/products"
+        self.bigweb_endpoint = "https://bigweb.co.jp/ver2/yugioh_index.php"
+        self.bigweb_api_endpoint = "https://api.bigweb.co.jp/products"
 
     def find_prices(self, jp_name):
         jp_name = self.format_name_for_search_engine(jp_name)
@@ -19,7 +20,7 @@ class BigWebPriceFinder(PriceFinder):
             'name': self.format_japanese_name(jp_name),
             }
 
-        r = requests.get(self.bigweb_endpoint, params=params)
+        r = requests.get(self.bigweb_api_endpoint, params=params)
 
         if r.status_code != 200:
             self.logger.error("BigWebPriceFinder.find_prices", "bigweb API returns " + str(r.status_code))
