@@ -1,3 +1,4 @@
+VERSION 0.6
 FROM --platform=linux/arm64 python:3.9
 
 ARG IMAGE=punparin/solomon-api
