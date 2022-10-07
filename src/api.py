@@ -2,6 +2,8 @@ import os
 import json
 from flask import Flask, request, Response
 from flask_caching import Cache
+from flask_api import status
+
 from BigWebPriceFinder import BigWebPriceFinder
 from YuyuteiPriceFinder import YuyuteiPriceFinder
 
@@ -27,13 +29,13 @@ def cards():
         result = yuyuteiPriceFinder.find_prices(name)
     else:
         return Response(response=json.dumps({"message": "Invalid request"}),
-                    status=400,
+                    status=status.HTTP_400_BAD_REQUEST,
                     mimetype="application/json"
                     )
         
     json_result = result.toJSON()
     response = Response(response=json_result,
-                    status=200,
+                    status=status.HTTP_200_OK,
                     mimetype="application/json"
                     )
 
@@ -41,7 +43,7 @@ def cards():
 
 @app.route('/health', methods=['GET'])
 def health():
-    return Response(response="OK", status=200)
+    return Response(response="OK", status=status.HTTP_200_OK)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
