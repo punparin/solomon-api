@@ -1,4 +1,5 @@
 from PriceFinder import *
+from http import HTTPStatus
 
 class BigWebPriceFinder(PriceFinder):
     def __init__(self):
@@ -22,7 +23,7 @@ class BigWebPriceFinder(PriceFinder):
 
         r = requests.get(self.bigweb_api_endpoint, params=params)
 
-        if r.status_code != 200:
+        if r.status_code != HTTPStatus.OK:
             self.logger.error("BigWebPriceFinder.find_prices", "bigweb API returns " + str(r.status_code))
 
         raw_card_infos = r.json()["items"]
